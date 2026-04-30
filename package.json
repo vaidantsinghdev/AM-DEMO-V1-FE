@@ -1,0 +1,21 @@
+{
+  "name": "finance-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "clients.html",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "start": "serve -s dist -l tcp://0.0.0.0:$PORT",
+    "preview": "vite preview",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "serve": "^14.2.6",
+    "vite": "^8.0.10"
+  }
+}

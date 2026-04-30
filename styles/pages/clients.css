@@ -1,0 +1,183 @@
+/* clients.html — list, drawer, account/liability rows. */
+
+/* Table */
+.clients-table {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+.clients-table table { width: 100%; border-collapse: collapse; }
+.clients-table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-text-muted);
+  background: #f9fafb;
+  border-bottom: 1px solid var(--color-border);
+}
+.clients-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-border-soft);
+  vertical-align: middle;
+}
+.clients-table tr:last-child td { border-bottom: none; }
+.clients-table tr:hover td { background: #fafafa; }
+
+.client-name { font-weight: 600; }
+.client-name a { color: var(--color-text); }
+.client-name a:hover { color: var(--color-primary); text-decoration: none; }
+
+.table-actions { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+
+/* Drawer */
+.drawer {
+  background: #fff;
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 920px;
+  padding: var(--space-5);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-lg);
+}
+.drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+.drawer-header h2 { font-size: 18px; font-weight: 700; }
+.drawer-close {
+  background: #f8fafc;
+  border: 1px solid var(--color-border);
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  color: var(--color-text-soft);
+  font-size: 18px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.drawer-close:hover {
+  background: var(--color-primary-soft);
+  border-color: rgba(37, 99, 235, 0.35);
+  color: var(--color-primary-dark);
+}
+.drawer-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: var(--space-4);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-soft);
+}
+
+/* Type toggle */
+.type-toggle { display: flex; gap: 8px; margin-bottom: 4px; }
+.type-toggle button {
+  flex: 1;
+  padding: 10px;
+  border-radius: var(--radius-md);
+  border: 1px solid #d7dee8;
+  background: #fff;
+  color: var(--color-text-soft);
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.type-toggle button.active {
+  border-color: rgba(37, 99, 235, 0.6);
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+}
+
+/* Account / Liability rows */
+.acct-header-row,
+.account-row {
+  display: grid;
+  grid-template-columns: 110px 150px 1fr 1fr 84px 84px 36px;
+  gap: 8px;
+  align-items: end;
+  margin-bottom: 6px;
+}
+.liab-header-row,
+.liability-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 100px 36px;
+  gap: 8px;
+  align-items: end;
+  margin-bottom: 6px;
+}
+.acct-header-row,
+.liab-header-row {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--color-border-soft);
+}
+.account-row .field,
+.liability-row .field { margin: 0; }
+.acct-header-row > div,
+.account-row > .field,
+.liab-header-row > div,
+.liability-row > .field { min-width: 0; }
+
+.remove-row-btn {
+  height: 38px;
+  width: 38px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: #fff;
+  color: #94a3b8;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.remove-row-btn:hover {
+  border-color: #fca5a5;
+  color: var(--color-error);
+  background: var(--color-error-soft);
+}
+.add-row-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-primary-soft);
+  color: var(--color-primary-dark);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(37, 99, 235, 0.20);
+  cursor: pointer;
+  margin-top: 10px;
+}
+.add-row-btn:hover {
+  background: #dbeafe;
+  border-color: rgba(37, 99, 235, 0.35);
+}
+
+@media (max-width: 760px) {
+  .overlay { padding: 16px 12px; }
+  .drawer { padding: 16px; }
+  .form-row.cols-2,
+  .form-row.cols-3 { grid-template-columns: 1fr; }
+  .acct-header-row,
+  .liab-header-row { display: none; }
+  .account-row,
+  .liability-row { grid-template-columns: 1fr; }
+}

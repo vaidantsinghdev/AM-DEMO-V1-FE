@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Client Profile — AW Client Report Portal</title>
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/pages/client.css" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-header">
+        <div>
+          <a class="back-link" href="clients.html">← Clients</a>
+          <h1 id="household-name">Loading…</h1>
+          <p class="page-sub" id="client-names"></p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-secondary" id="btn-edit">Edit</button>
+          <button class="btn-danger" id="btn-archive">Archive</button>
+        </div>
+      </div>
+
+      <div id="loading-state" class="loading">Loading client…</div>
+      <div id="error-state" class="error-message" style="display: none"></div>
+
+      <div id="content" style="display: none">
+        <section class="card">
+          <h2>Household</h2>
+          <div class="info-grid" id="people-grid"></div>
+        </section>
+
+        <section class="card">
+          <h2>Accounts</h2>
+          <div id="accounts-list" class="account-cards"></div>
+        </section>
+
+        <section class="card">
+          <h2>Liabilities</h2>
+          <div id="liabilities-list" class="account-cards"></div>
+        </section>
+
+        <section class="card">
+          <h2>Static Financials</h2>
+          <dl class="info-grid" id="financials-grid"></dl>
+        </section>
+
+        <section class="card">
+          <h2>Report History</h2>
+          <div id="reports-loading" class="loading">Loading reports…</div>
+          <div id="reports-empty" class="empty-state" style="display: none">
+            <p>No reports generated yet.</p>
+          </div>
+          <table id="reports-table" class="reports-table" style="display: none">
+            <thead>
+              <tr>
+                <th>Period</th>
+                <th>Generated</th>
+                <th>Downloads</th>
+              </tr>
+            </thead>
+            <tbody id="reports-tbody"></tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+
+    <script type="module" src="js/client-page.js"></script>
+  </body>
+</html>

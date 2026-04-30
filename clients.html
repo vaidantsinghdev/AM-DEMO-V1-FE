@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clients — AW Client Report Portal</title>
+    <link rel="stylesheet" href="styles/tokens.css" />
+    <link rel="stylesheet" href="styles/base.css" />
+    <link rel="stylesheet" href="styles/pages/clients.css" />
+  </head>
+  <body>
+    <div class="page">
+      <div class="page-header">
+        <div>
+          <h1>Clients</h1>
+          <p class="page-sub">Households tracked in the AW Portal</p>
+        </div>
+        <button class="btn-primary" id="btn-add-client">+ Add Client</button>
+      </div>
+
+      <div id="loading-state" class="loading">Loading clients…</div>
+
+      <div class="empty-state" id="empty-state" style="display: none">
+        <p>No clients yet.</p>
+        <button class="btn-primary" id="btn-add-first">+ Add your first client</button>
+      </div>
+
+      <div class="clients-table" id="table-wrap" style="display: none">
+        <table>
+          <thead>
+            <tr>
+              <th>Household</th>
+              <th>Type</th>
+              <th>Last Report</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="clients-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Add / Edit drawer -->
+    <div class="overlay" id="overlay">
+      <div class="drawer">
+        <div class="drawer-header">
+          <h2 id="drawer-title">New Client</h2>
+          <button class="drawer-close" id="btn-cancel" type="button">×</button>
+        </div>
+
+        <form id="client-form" onsubmit="return false;">
+          <input type="hidden" id="client-id" />
+
+          <div class="form-section">
+            <div class="form-section-title">Household</div>
+            <div class="field">
+              <label>Household Name <span class="req">*</span></label>
+              <input type="text" id="household-name" placeholder="e.g. Doe Family" />
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Client Type</div>
+            <div class="type-toggle">
+              <button type="button" data-type="single" class="active">Single</button>
+              <button type="button" data-type="married">Married</button>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Client 1</div>
+            <div class="form-row cols-2">
+              <div class="field">
+                <label>First Name <span class="req">*</span></label>
+                <input type="text" id="c1-first" placeholder="Jane" />
+              </div>
+              <div class="field">
+                <label>Last Name <span class="req">*</span></label>
+                <input type="text" id="c1-last" placeholder="Doe" />
+              </div>
+            </div>
+            <div class="form-row cols-3">
+              <div class="field">
+                <label>Date of Birth</label>
+                <input type="date" id="c1-dob" />
+              </div>
+              <div class="field">
+                <label>Age</label>
+                <input type="text" id="c1-age" placeholder="Auto" disabled />
+              </div>
+              <div class="field">
+                <label>Last 4 SSN</label>
+                <input type="text" id="c1-ssn" placeholder="XXXX" maxlength="4" inputmode="numeric" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section" id="spouse-section" style="display: none">
+            <div class="form-section-title">Client 2 (Spouse)</div>
+            <div class="form-row cols-2">
+              <div class="field">
+                <label>First Name</label>
+                <input type="text" id="c2-first" placeholder="John" />
+              </div>
+              <div class="field">
+                <label>Last Name</label>
+                <input type="text" id="c2-last" placeholder="Doe" />
+              </div>
+            </div>
+            <div class="form-row cols-3">
+              <div class="field">
+                <label>Date of Birth</label>
+                <input type="date" id="c2-dob" />
+              </div>
+              <div class="field">
+                <label>Age</label>
+                <input type="text" id="c2-age" placeholder="Auto" disabled />
+              </div>
+              <div class="field">
+                <label>Last 4 SSN</label>
+                <input type="text" id="c2-ssn" placeholder="XXXX" maxlength="4" inputmode="numeric" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Accounts</div>
+            <div class="acct-header-row">
+              <div>Owner</div>
+              <div>Kind</div>
+              <div>Institution</div>
+              <div>Label</div>
+              <div>Last 4</div>
+              <div>Rate %</div>
+              <div></div>
+            </div>
+            <div id="accounts-list"></div>
+            <button type="button" class="add-row-btn" id="btn-add-account">+ Add account</button>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Liabilities</div>
+            <div class="liab-header-row">
+              <div>Type</div>
+              <div>Description</div>
+              <div>Rate %</div>
+              <div></div>
+            </div>
+            <div id="liabilities-list"></div>
+            <button type="button" class="add-row-btn" id="btn-add-liability">+ Add liability</button>
+          </div>
+
+          <div class="form-section">
+            <div class="form-section-title">Static Financials</div>
+            <div class="form-row cols-2">
+              <div class="field">
+                <label>Monthly Inflow (after tax) <span class="req">*</span></label>
+                <input type="text" id="inflow-mo" placeholder="$0" inputmode="decimal" />
+              </div>
+              <div class="field">
+                <label>Monthly Outflow (expenses) <span class="req">*</span></label>
+                <input type="text" id="outflow-mo" placeholder="$0" inputmode="decimal" />
+              </div>
+            </div>
+            <div class="form-row cols-2">
+              <div class="field">
+                <label>Private Reserve Target (optional)</label>
+                <input type="text" id="pr-target" placeholder="$0" inputmode="decimal" />
+              </div>
+              <div class="field">
+                <label>Trust / Property Address (optional)</label>
+                <input type="text" id="trust-address" placeholder="123 Main St" />
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div class="drawer-footer">
+          <button class="btn-secondary" id="btn-cancel-footer" type="button">Cancel</button>
+          <button class="btn-primary" id="btn-save" type="button">Save Client</button>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="js/clients-page.js"></script>
+  </body>
+</html>

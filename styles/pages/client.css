@@ -1,0 +1,86 @@
+/* client.html — profile detail + history. */
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-3);
+}
+.info-grid > div {
+  background: var(--color-muted);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-3);
+}
+.info-grid dt {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
+}
+.info-grid dd { font-size: 14px; font-weight: 500; }
+
+.info-card {
+  background: var(--color-muted);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+.info-card h3 { margin-bottom: var(--space-2); }
+.info-card dl {
+  display: grid;
+  grid-template-columns: 100px 1fr;
+  gap: 6px 12px;
+}
+.info-card dt { font-size: 12px; color: var(--color-text-muted); }
+.info-card dd { font-size: 13px; }
+
+.account-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-3);
+}
+.account-card {
+  background: var(--color-muted);
+  border: 1px solid var(--color-border-soft);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+}
+.account-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-2);
+  gap: var(--space-2);
+}
+.account-card dl {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 4px 10px;
+}
+.account-card dt { font-size: 12px; color: var(--color-text-muted); }
+.account-card dd { font-size: 13px; }
+
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.reports-table th {
+  text-align: left;
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--color-text-muted);
+  background: #f9fafb;
+  border-bottom: 1px solid var(--color-border);
+}
+.reports-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--color-border-soft);
+  vertical-align: middle;
+}
+.reports-table tr:last-child td { border-bottom: none; }
+.downloads { display: flex; gap: var(--space-2); flex-wrap: wrap; }
