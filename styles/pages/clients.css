@@ -31,7 +31,7 @@
 .client-name a { color: var(--color-text); }
 .client-name a:hover { color: var(--color-primary); text-decoration: none; }
 
-.table-actions { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+.table-actions { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 
 /* Drawer */
 .drawer {

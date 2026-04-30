@@ -214,6 +214,8 @@ function addAccountRow(account = null) {
     if (account.institution) inst.value = account.institution;
     const last4 = row.querySelector(`[name="acct_last4_${i}"]`);
     if (account.last_4 != null) last4.value = String(account.last_4);
+    const rate = row.querySelector(`[name="acct_rate_${i}"]`);
+    if (account.interest_rate != null && rate) rate.value = String(account.interest_rate);
   }
 
   // Apply household-type owner constraints
@@ -244,18 +246,22 @@ function collectAccounts() {
     const last4Raw = row
       .querySelector(`[name="acct_last4_${i}"]`)
       ?.value?.trim();
+    const rateRaw = row
+      .querySelector(`[name="acct_rate_${i}"]`)
+      ?.value?.trim();
 
     if (!kind || !label) return;
 
     const last_4 =
       last4Raw && /^\d{1,4}$/.test(last4Raw) ? parseInt(last4Raw, 10) : null;
+    const interest_rate = rateRaw ? rateRaw : null;
     accounts.push({
       owner: owner || null,
       kind,
       institution,
       label,
       last_4,
-      interest_rate: null,
+      interest_rate,
       active: true,
     });
   });
